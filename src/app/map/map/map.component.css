@@ -1,0 +1,92 @@
+#map {
+    height: 100vh;
+    width: 100%;
+}
+
+.leaflet-sidebar-content, li.active {
+    background: #0a3d62 !important;
+    opacity: 0.7;
+}
+
+.leaflet-sidebar-content {
+    left: 0 !important;
+    position: unset !important;
+}
+
+.leaflet-sidebar {
+    border-radius: 20px;
+    height: fit-content;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.leaflet-sidebar-tabs {
+    display: none !important;
+}
+
+.home-tab {
+    pointer-events: none;
+    cursor: none;
+}
+
+.leaflet-sidebar-content {
+    padding: 40px;
+    height: fit-content;
+}
+
+.leaflet-sidebar-pane {
+    padding-left: 0;
+}
+
+.leaflet-attribution-flag {
+    display: none !important;
+}
+
+.country-info-div {
+    margin-top: 57px;
+}
+
+.country-info-div div {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.user-message {
+    position: absolute;
+    top: 0;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.welcome-sentence {
+    color: #38b6ff;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.age-sentence {
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 13px;
+    color: mediumpurple;
+}
+
+.country-info-title {
+    color: darkgrey;
+}
+
+.flag-img {
+    width: 40px;
+}
+
+.logout-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.9;
+    background: grey;
+    border: black 1px;
+}

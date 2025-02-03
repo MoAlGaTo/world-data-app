@@ -1,0 +1,91 @@
+<div id="map"></div>
+
+<div id="sidebar" class="leaflet-sidebar collapsed">
+    <div class="leaflet-sidebar-tabs">
+        <ul role="tablist">
+            <li>
+                <a href="#home" role="tab" class="home-tab"></a>
+            </li>
+        </ul>
+
+        <ul role="tablist">
+            <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+        </ul>
+    </div>
+
+    <div class="leaflet-sidebar-content">
+        <button class="btn btn-danger logout-button"
+                ngbTooltip="Logout"
+                position="left"
+                (click)="logoutButtonHover()">⏻</button>
+    
+        <div class="leaflet-sidebar-pane" id="home">
+            <div class="user-message" style="margin-bottom: 10px;">
+                <div class="welcome-sentence">{{ ('Welcome ' + user.firstName + ' ' + user.lastName) | titlecase }}</div>
+                <div class="age-sentence">You've spent {{ userAge }} years on Earth,</div>
+                <div class="age-sentence">it's time to get to know it better!</div>
+            </div>
+
+            <div class="country-info-div">
+                <div>
+                    <span class="country-info-title">Country name: </span>
+                    <span>{{ currentCountry()?.name }}</span>
+                </div>
+    
+                <div>
+                    <span class="country-info-title">Capital: </span>
+                    <span>{{ currentCountry()?.capital }}</span>
+                </div>
+    
+                <div>
+                    <span class="country-info-title">Continent: </span>
+                    <span>{{ currentCountry()?.continent }}</span>
+                </div>
+    
+                <div>
+                    <span class="country-info-title">Flag: </span>
+                    <span>
+                        @if (currentCountry()?.flag) {
+                            <img [src]="currentCountry()!.flag" class="flag-img"/>
+                        }
+                    </span>
+                </div>
+    
+                <div>
+                    <span class="country-info-title">Population: </span>
+                    <span>{{ currentCountry()?.population }}</span>
+                </div>
+    
+                <div>
+                    <span class="country-info-title">Language(s): </span>
+                    <span>{{ currentCountry()?.languages }}</span>
+                </div>
+                
+                <div>
+                    <span class="country-info-title">Currency: </span>
+                    <span>{{ currentCountry()?.currency }}</span>
+                </div>
+                
+                <div>
+                    <span class="country-info-title">Country code: </span>
+                    <span>{{ currentCountry()?.countryCode }}</span>
+                </div>
+                
+                <div>
+                    <span class="country-info-title">Start of week: </span>
+                    <span>{{ currentCountry()?.startOfWeek }}</span>
+                </div>
+                
+                <div>
+                    <span class="country-info-title">Number of time zones: </span>
+                    <span>{{ currentCountry()?.numberOfTimeZones }}</span>
+                </div>
+                
+                <div>
+                    <span class="country-info-title">Time zone(s): </span>
+                    <span>{{ currentCountry()?.timezones }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

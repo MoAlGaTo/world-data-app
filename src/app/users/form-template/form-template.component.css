@@ -1,0 +1,43 @@
+.content-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-div {
+    width: inherit;
+    background-color: white;
+    padding: 25px;
+    border-radius: 13px;
+    z-index: 2;
+    margin: 20px;
+}
+
+:host {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(to bottom, #4784af, #6e166b);
+}
+  
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.submit-button {
+    background: linear-gradient(to right, #4784af, #6e166b);
+}
+
+.submit-button:hover {
+    background: linear-gradient(to bottom, #4784af, #6e166b);
+}

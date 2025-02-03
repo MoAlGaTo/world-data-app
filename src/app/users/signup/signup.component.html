@@ -1,0 +1,100 @@
+<app-form-template
+  [buttonMessage]="'Create my account'"
+  (submitButtonClick)="submitForm()"
+  [redirectionQuestionMessage]="'Already have an account?'"
+  [redirectionRoute]="'/signin'"
+  [redirectionMessage]="' Sign in'">
+
+  <form [formGroup]="signUpForm" class="signup-form" autocomplete="off">
+    <div class="form-group">
+      <label for="firstName">First name</label>
+      <input type="text" class="form-control" id="firstName"
+        [formControlName]="SignUpFormKeyName.firstName"
+        [class.is-invalid]="displayFirstNameError()">
+
+          @if (displayFirstNameError()) {
+            <div class="invalid-feedback">Please provide a valid first name.</div>
+          }
+    </div>
+  
+    <div class="form-group">
+      <label for="lastName">Last name</label>
+      <input type="text" class="form-control" id="lastName"
+        [formControlName]="SignUpFormKeyName.lastName"
+        [class.is-invalid]="displayLastNameError()">
+
+        @if (displayLastNameError()) {
+          <div class="invalid-feedback">Please provide a valid last name.</div>
+        }
+    </div>
+  
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email"
+        [formControlName]="SignUpFormKeyName.email"
+        [class.is-invalid]="displayEmailError()">
+
+        @if (displayEmailError()) {
+          <div class="invalid-feedback">Please provide a valid email.</div>
+        }
+    </div>
+  
+    <div class="form-row">
+        <div class="form-group">
+            <label for="password">Password</label>
+            <div class="d-flex" style="align-items: baseline;">
+              <div class="w-100">
+                <input [type]=" signUpForm.value.showPassword ? 'text' : 'password'" class="form-control" id="password"
+                  autocomplete="new-password"
+                  [formControlName]="SignUpFormKeyName.password"
+                  [class.is-invalid]="displayPasswordError()">
+
+                  @if (displayPasswordError()) {
+                    <div class="invalid-feedback">Please provide a valid password (between 4 and 50 characters).</div>
+                  }
+              </div>
+  
+                <div class="form-check ms-3">
+                  <input class="form-check-input input-exception" type="checkbox" id="showPassword" [formControlName]="SignUpFormKeyName.showPassword">
+                  <label class="form-check-label" for="showPassword" style="width: max-content;">
+                    Show password
+                  </label>
+                </div>
+  
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="birthDate">Date of birth</label>
+      <div class="input-group">
+        <input
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="birthDate"
+          ngbDatepicker
+          [maxDate]="today"
+          [minDate]="{ year: 1900, month: 1, day: 1 }"
+          [formControlName]="SignUpFormKeyName.birthDate"
+          [placement]="'top-end'"
+          #d="ngbDatepicker"/>
+
+        <button
+          class="btn btn-outline-secondary bi bi-calendar3"
+          (click)="d.toggle()"
+          type="button"
+          style="border: solid 1px lightgrey; background: linear-gradient(to bottom, #4784af, #6e166b)">🔼
+        </button>
+      </div>
+
+      @if (showSuccessMessage) {
+        <ngb-alert [dismissible]="false" type="success">
+          <div>
+            <strong>Your account has been successfully created!<br/>You are about to be redirected to the login page</strong>
+          </div>
+        </ngb-alert>
+      }
+		</div>
+  </form>
+  
+</app-form-template>

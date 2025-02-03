@@ -1,0 +1,54 @@
+<app-form-template
+    [buttonMessage]="'login'"
+    (submitButtonClick)="submitForm()"
+    [redirectionQuestionMessage]="'Don\'t have an account?'"
+    [redirectionRoute]="'/signup'"
+    [redirectionMessage]="' Sign up'">
+
+    <form [formGroup]="signInForm" class="signup-form" autocomplete="off">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email"
+            [formControlName]="SignInFormKeyName.email"
+            [class.is-invalid]="displayEmailError()">
+    
+            @if (displayEmailError()) {
+                <div class="invalid-feedback">Please provide a valid email.</div>
+            }
+        </div>
+    
+        <div class="form-row">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="d-flex" style="align-items: baseline;">
+                    <div class="w-100">
+                    <input [type]=" signInForm.value.showPassword ? 'text' : 'password'" class="form-control" id="password"
+                        autocomplete="new-password"
+                        [formControlName]="SignInFormKeyName.password"
+                        [class.is-invalid]="displayPasswordError()">
+    
+                        @if (displayPasswordError()) {
+                        <div class="invalid-feedback">Please provide a valid password (between 4 and 50 characters).</div>
+                        }
+                    </div>
+        
+                    <div class="form-check ms-3">
+                        <input class="form-check-input input-exception" type="checkbox" id="showPassword" [formControlName]="SignInFormKeyName.showPassword">
+                        <label class="form-check-label" for="showPassword" style="width: max-content;">
+                        Show password
+                        </label>
+                    </div>
+        
+                </div>
+                @if (showNotValidAccountMessage) {
+                    <ngb-alert [dismissible]="false" type="danger">
+                      <div>
+                        <strong>Invalid email or password.</strong>
+                      </div>
+                    </ngb-alert>
+                }
+            </div>
+        </div>
+    </form>
+    
+  </app-form-template>

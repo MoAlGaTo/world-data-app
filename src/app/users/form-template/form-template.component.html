@@ -1,0 +1,22 @@
+<video class="background" autoplay muted loop playsinline>
+    <source src="assets/videos/earth-rotation.mp4" type="video/mp4">
+    Your browser does not support video.
+</video>
+
+<div class="content-div">
+    <div class="form-div">
+        <div class="d-flex justify-content-center mb-3">
+            <img src="assets/images/World-Data.png" style="height: 300px; border-radius: 10px; width: 100%;">
+        </div>
+    
+        <ng-content></ng-content>
+    
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <button class="btn btn-primary mt-3 me-2 submit-button" (click)="onSubmitButtonClick()">{{ buttonMessage }}</button>
+            <p style="margin: 0; font-weight: bold;">
+                {{ redirectionQuestionMessage }}
+                <a [routerLink]="[redirectionRoute]">{{ redirectionMessage }}</a>
+            </p>
+        </div>
+    </div>
+</div>
