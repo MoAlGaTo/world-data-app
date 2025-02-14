@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: '13.39.110.38/graphql',
+    apiUrl: 'http://35.180.47.79:3000/graphql',
 };
