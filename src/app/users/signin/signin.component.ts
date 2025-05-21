@@ -1,9 +1,9 @@
 import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormTemplateComponent } from '../form-template/form-template.component';
-import { AuthService, User } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService, User } from '../../core/services/auth/auth.service';
 
 enum SignInFormKeyName {
   email = "email",

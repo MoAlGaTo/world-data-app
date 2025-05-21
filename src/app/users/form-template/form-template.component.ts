@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -12,7 +12,6 @@ import { RouterModule } from '@angular/router';
   styleUrl: './form-template.component.css'
 })
 export class FormTemplateComponent implements AfterViewInit {
-  @Input() form: FormGroup
   @Input() buttonMessage: string
   @Input() redirectionQuestionMessage: string
   @Input() redirectionMessage: string

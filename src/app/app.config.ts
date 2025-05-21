@@ -8,7 +8,7 @@ import { InMemoryCache } from '@apollo/client/cache';
 import { ApolloLink } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 import { setContext } from '@apollo/client/link/context';
-import { environment } from '../environment/environment';
+import { environment } from './environment/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,30 +18,19 @@ export const appConfig: ApplicationConfig = {
     provideApollo(() => {
       const httpLink = inject(HttpLink);
      
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const basic = setContext((operation, context) => ({
+      const basic = setContext(() => ({
         headers: {
           'Accept': 'application/json'
         },
       }));
-     
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const auth = setContext((operation, context) => {
-        const token = localStorage.getItem('access_token');
-
-        if (token === null) {
-          return {};
-        } else {
-          return {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          };
-        }
-      });
 
       return {
-        link: ApolloLink.from([basic, auth, httpLink.create({ uri: environment.apiUrl })]),
+        link: ApolloLink.from([
+          basic,
+          httpLink.create({
+            uri: environment.apiUrl,
+            withCredentials: true // to send cookie HTTP-only
+          })]),
         cache: new InMemoryCache(),
       };
     })

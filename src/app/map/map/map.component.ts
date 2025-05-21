@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component, inject, OnInit, signal, ViewEncapsulation, WritableSignal } from '@angular/core';
-import { CountriesResult, Country, MapService } from '../../core/services/map.service';
+import { CountriesResult, Country, MapService } from '../../core/services/map/map.service';
 import { ApolloQueryResult } from '@apollo/client/core';
 import { Subject, throttleTime } from 'rxjs';
 import * as Leaflet from 'leaflet';
 import "leaflet-providers";
 import "leaflet-sidebar-v2";
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, User } from '../../core/services/auth.service';
+import { AuthService, User } from '../../core/services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 
 declare module 'leaflet' {
@@ -16,7 +16,7 @@ declare module 'leaflet' {
   }
 }
 
-interface CurrentCountry {
+export interface CurrentCountry {
   name: string,
   capital: string,
   flag: string,
@@ -25,7 +25,6 @@ interface CurrentCountry {
   continent: string,
   countryA3Code: string,
   languages: string,
-  countryCode: string,
   numberOfTimeZones: number,
   timezones: string,
   startOfWeek: string,
@@ -54,9 +53,9 @@ export class MapComponent implements OnInit {
     this.setSidebarOnMap();
     this.setMapClickEvent();
     this.changeDetector.detectChanges();
-    this.mapService.getCountrieData().subscribe(
+    this.mapService.getCountriesData().subscribe(
       (countries: ApolloQueryResult<CountriesResult>) =>  {
-        this.setCountryDataOnMap(countries.data.getCountrieData);
+        this.setCountryDataOnMap(countries.data.getCountriesData);
         this.changeDetector.detectChanges();
         setTimeout(() => {
           this.changeDetector.detach();
@@ -148,16 +147,15 @@ export class MapComponent implements OnInit {
 
   private setCurrentCountryData(event: Leaflet.LeafletMouseEvent, country: Country) {
     this.currentCountry.set({
-      name: country.name,
+      name: country.name.common,
       capital: country.capital[0],
-      flag: country.flag,
+      flag: country.flags.png,
       currency: country.currencies.length ? `${country.currencies[0].name} (${country.currencies[0].symbol})` : "",
       population: country.population,
       continent: country.continents.join(", "),
       languages: country.languages.join(", "),
       numberOfTimeZones: country.timezones.length,
       timezones: country.timezones.join(", "),
-      countryCode: country.callingcode,
       startOfWeek: country.startOfWeek,
       countryA3Code: event.propagatedFrom.feature.properties.country_a3,
     });
@@ -177,7 +175,7 @@ export class MapComponent implements OnInit {
     event.propagatedFrom.setStyle({ fillColor: "white", color: "white" });
   }
 
-  private getUserAge(dateOfBirth: Date) {
+  public getUserAge(dateOfBirth: Date) {
     const birthDate = new Date(dateOfBirth);
     const today = new Date();
 
@@ -187,7 +185,7 @@ export class MapComponent implements OnInit {
 
     // Adjust if the anniversary has not yet passed this year
     if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-        age--;
+      age--;
     }
 
     return age;

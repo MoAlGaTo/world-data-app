@@ -53,7 +53,7 @@
     
                 <div>
                     <span class="country-info-title">Population: </span>
-                    <span>{{ currentCountry()?.population }}</span>
+                    <span>{{ currentCountry()?.population | number }}</span>
                 </div>
     
                 <div>
@@ -64,11 +64,6 @@
                 <div>
                     <span class="country-info-title">Currency: </span>
                     <span>{{ currentCountry()?.currency }}</span>
-                </div>
-                
-                <div>
-                    <span class="country-info-title">Country code: </span>
-                    <span>{{ currentCountry()?.countryCode }}</span>
                 </div>
                 
                 <div>

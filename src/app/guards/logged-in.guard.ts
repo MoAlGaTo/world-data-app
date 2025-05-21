@@ -1,5 +1,5 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../core/services/auth.service';
+import { AuthService } from '../core/services/auth/auth.service';
 import { inject } from '@angular/core';
 
 export const loggedInGuard: CanActivateFn = (route) => {
@@ -8,35 +8,13 @@ export const loggedInGuard: CanActivateFn = (route) => {
   const router: Router = inject(Router);
   const isAuthenticated = auth.isAuthenticated;
 
-  switch (path) {
-    case "map": {
-      if (!isAuthenticated) {
-        router.navigate(["/signin"]);
-        return false;
-      }
-      break;
-    }
-
-    case "signin": {
-      if (isAuthenticated) {
-        router.navigate(["/map"]);
-        return false;
-      }
-      break;
-    }
-      
-  
-    default: {
-      if (isAuthenticated) {
-        router.navigate(["/map"]);
-        return false;
-      } else {
-        router.navigate(["/signin"]);
-        return false;
-      }
-    }
+  if ((path === "map" || path !== "signin") && !isAuthenticated) {
+    router.navigate(["/signin"]);
+    return false;
+  } else if ((path === "signin" || path !== "map") && isAuthenticated) {
+    router.navigate(["/map"]);
+    return false;
+  } else {
+    return true
   }
-  
-  return true;
 };
-
